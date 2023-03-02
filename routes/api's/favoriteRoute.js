@@ -94,7 +94,9 @@ router.get("/showfavorite2", mwAuth, async (req, res) => {
     let fullFavoriteProductArry = [];
     for (id of data.favoritesId) {
       let favoriteProduct = await productsModel.findProductById(id);
-      fullFavoriteProductArry.push(favoriteProduct);
+      if (favoriteProduct) {
+        fullFavoriteProductArry.push(favoriteProduct);
+      }
     }
     res.json(fullFavoriteProductArry);
   } catch (err) {

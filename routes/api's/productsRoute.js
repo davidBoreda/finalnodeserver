@@ -30,6 +30,19 @@ router.put("/editproduct", mwIsAdmin, async (req, res) => {
   }
 });
 
+router.delete("/deleteproduct/:id", mwIsAdmin, async (req, res) => {
+  try {
+    const validateValues = await productsValidation.validateRemoveProductSchema(
+      req.params
+    );
+    console.log(validateValues.id);
+    deletedProduct = await productsModel.deleteProduct(validateValues.id);
+    res.json({ deleted: deletedProduct });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+});
+
 router.get("/:pageNum/:itemsPerPage/findbyname", async (req, res) => {
   try {
     const validateValues =

@@ -42,8 +42,8 @@ const findProductByName = (productName, pageNum, itemsPerPage) => {
     .limit(itemsPerPage);
 };
 
-const deleteProduct = (id) => {
-  return Products.findByIdAndRemove(id);
+const deleteProduct = (_id) => {
+  return Products.findByIdAndRemove(_id);
 };
 
 module.exports = {

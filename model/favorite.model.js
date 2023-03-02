@@ -37,6 +37,6 @@ const findByObjectIdAndUpdate = (_id, newArry) => {
 module.exports = {
   addNewFavorite,
   findFavoriteByClientId,
-  updateFavoriteByClientId,
+  // updateFavoriteByClientId,
   findByObjectIdAndUpdate,
 };
