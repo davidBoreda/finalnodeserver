@@ -53,8 +53,6 @@ router.patch("/addtofavorite", mwAuth, async (req, res) => {
         debug(item);
       }
       res.json(fullFavoriteProductArry);
-      // debug("after update" + updatedObject);
-      // res.json({ updatedObject });
     } else {
       throw new ResponseError("db", [
         "no favorite list for this user, please ceate one first",

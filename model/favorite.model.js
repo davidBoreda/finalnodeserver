@@ -27,12 +27,12 @@ const findByObjectIdAndUpdate = (_id, newArry) => {
   });
 };
 
-const updateFavoriteByClientId = (clientId, { favArry, favoritesId }) => {
-  return Favorite.findOneAndUpdate(clientId, {
-    // ["favoritesId"]: favoritesId.push(...favoritesId, favoritesId),
-    ["favoritesId"]: [...favArry, favoritesId],
-  });
-};
+// const updateFavoriteByClientId = (clientId, { favArry, favoritesId }) => {
+//   return Favorite.findOneAndUpdate(clientId, {
+//     // ["favoritesId"]: favoritesId.push(...favoritesId, favoritesId),
+//     ["favoritesId"]: [...favArry, favoritesId],
+//   });
+// };
 
 module.exports = {
   addNewFavorite,
