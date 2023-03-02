@@ -7,9 +7,18 @@ const newFavoriteSchema = Joi.object({
   favoritesId: Joi.string().hex().required(),
 });
 
+const addTofavoriteSchema = Joi.object({
+  clientId: Joi.string().required(),
+  favoritesId: Joi.string().required(),
+});
+
 const validateNewFavoriteSchema = (userInput) =>
   validate(userInput, newFavoriteSchema);
 
+const validateAddToFavorite = (userInput) =>
+  validate(userInput, addTofavoriteSchema);
+
 module.exports = {
   validateNewFavoriteSchema,
+  validateAddToFavorite,
 };
