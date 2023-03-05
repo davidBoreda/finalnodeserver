@@ -1,6 +1,8 @@
 const ResponseError = require("../module/ResponseError");
+const debug = require("debug")("finalnodeserver:validation");
 
 const validateSchema = (userInput, schema) => {
+  debug("here");
   return new Promise((resolve, reject) => {
     schema
       .validateAsync(userInput, { abortEarly: false })
@@ -14,6 +16,7 @@ const validateSchema = (userInput, schema) => {
 
         reject(new ResponseError("validation", details));
       });
+    debug("after here");
   });
 };
 

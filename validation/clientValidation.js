@@ -1,3 +1,4 @@
+const { object } = require("joi");
 const Joi = require("joi");
 const validate = require("./validation");
 
@@ -17,6 +18,11 @@ const registerSchema = Joi.object({
     }),
   age: Joi.number(),
   picture: Joi.string().trim(),
+  clientAdress: {
+    city: Joi.string().min(3).max(255).trim().required(),
+    street: Joi.string().min(3).max(255).trim().required(),
+    houseNum: Joi.number().min(0).required(),
+  },
 });
 
 const loginSchema = Joi.object({
@@ -31,6 +37,17 @@ const loginSchema = Joi.object({
     .messages({
       "string.pattern.base": "follow password rules",
     }),
+});
+
+const editClientSchema = Joi.object({
+  fName: Joi.string().min(3).max(255).alphanum().trim(),
+  lName: Joi.string().min(3).max(255).alphanum().trim(),
+  age: Joi.number(),
+  clientAdress: {
+    city: Joi.string().min(3).max(255).trim(),
+    street: Joi.string().min(3).max(255).trim(),
+    houseNum: Joi.number().min(0),
+  },
 });
 
 const newPassSchema = Joi.object({
@@ -69,9 +86,12 @@ const validateNewPassSchema = (userInput) => validate(userInput, newPassSchema);
 
 const validateUnBlockSchema = (userMail) => validate(userMail, unBlockSchema);
 
+const validateEditClient = (userInput) => validate(userInput, editClientSchema);
+
 module.exports = {
   validateRegisterSchema,
   validateLoginSchema,
   validateNewPassSchema,
   validateUnBlockSchema,
+  validateEditClient,
 };

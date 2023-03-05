@@ -16,6 +16,11 @@ const clientSchema = new Schema({
     accountBlocked: { type: Boolean, default: false },
     lastLoginAttempt: { type: Date, default: Date.now },
   },
+  clientAdress: {
+    city: { type: String, require: true },
+    street: { type: String, require: true },
+    houseNum: { type: String, require: true },
+  },
 });
 
 //createing client collection and connecting to client schema
@@ -25,6 +30,22 @@ const Clients = mongoose.model("clients", clientSchema);
 const createNewClient = (clientData) => {
   const newClient = new Clients(clientData);
   return newClient.save();
+};
+
+const editClient = (
+  id,
+  { fName, lName, age, clientAdress: { city, street, houseNum } }
+) => {
+  return Clients.findByIdAndUpdate(id, {
+    fName,
+    lName,
+    age,
+    clientAdress: {
+      city,
+      street,
+      houseNum,
+    },
+  });
 };
 
 const findByMail = (email) => {
@@ -72,4 +93,5 @@ module.exports = {
   setNewPass,
   isAdminById,
   unblockAccount,
+  editClient,
 };

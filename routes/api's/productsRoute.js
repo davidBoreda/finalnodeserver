@@ -4,6 +4,7 @@ const upload = require("../../config/multer");
 const productsValidation = require("../../validation/productsValidation");
 const mwIsAdmin = require("../../middleware/mw.IsAdmin");
 const productsModel = require("../../model/products.model");
+const debug = require("debug")("finalnodeserver:productsRouter");
 
 router.post("/addnewproduct", mwIsAdmin, async (req, res) => {
   try {
@@ -22,7 +23,7 @@ router.put("/editproduct", mwIsAdmin, async (req, res) => {
     const validateData = await productsValidation.validateEditProductSchema(
       req.body
     );
-    console.log(validateData._id);
+    debug(validateData);
     await productsModel.updateProduct(validateData._id, { ...validateData });
     res.json({ msg: "product updated" });
   } catch (err) {

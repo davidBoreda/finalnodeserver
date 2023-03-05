@@ -104,4 +104,16 @@ router.patch("/unblock", mwIsAdmin, async (req, res) => {
   }
 });
 
+router.put("/editclient", mwAuth, async (req, res) => {
+  try {
+    const validateData = await clientValidation.validateEditClient(req.body);
+    updateClient = await clientsModel.editClient(req.userData, {
+      ...validateData,
+    });
+    res.json({ msg: "client updated" });
+  } catch (err) {
+    res.status(400).json({ err });
+  }
+});
+
 module.exports = router;

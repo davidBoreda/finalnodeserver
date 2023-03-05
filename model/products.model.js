@@ -7,6 +7,7 @@ const productsSchema = new Schema({
   brand: { type: String, required: true },
   description: { type: String, required: true },
   price: { type: Number, required: true },
+  stockQuant: { type: Number, required: true },
   picture: { type: String },
 });
 
@@ -21,12 +22,13 @@ const findProductById = (_id) => {
   return Products.findById(_id);
 };
 
-const updateProduct = (id, { name, brand, description, price }) => {
+const updateProduct = (id, { name, brand, description, price, stockQuant }) => {
   return Products.findByIdAndUpdate(id, {
     name,
     brand,
     description,
     price,
+    stockQuant,
   });
 };
 
