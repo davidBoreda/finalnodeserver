@@ -85,6 +85,16 @@ const unblockAccount = (_id) => {
   });
 };
 
+const findClientById = (_id) => {
+  return Clients.findById(_id);
+};
+
+const findFilterdClientById = (_id) => {
+  return Clients.findById(_id).select(
+    "-accountSecurity -email -password -isAdmin"
+  );
+};
+
 module.exports = {
   createNewClient,
   findByMail,
@@ -94,4 +104,6 @@ module.exports = {
   isAdminById,
   unblockAccount,
   editClient,
+  findClientById,
+  findFilterdClientById,
 };

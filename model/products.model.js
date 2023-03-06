@@ -48,6 +48,10 @@ const deleteProduct = (_id) => {
   return Products.findByIdAndRemove(_id);
 };
 
+const findFilterdProductById = (_id) => {
+  return Products.findById(_id).select("-_v -stockQuant");
+};
+
 module.exports = {
   findProductById,
   addNewProduct,
@@ -55,4 +59,5 @@ module.exports = {
   deleteProduct,
   updateProduct,
   findProductByName,
+  findFilterdProductById,
 };
