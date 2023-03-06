@@ -11,40 +11,27 @@ const debug = require("debug")("finalnodeserver:ordersRouter");
 
 router.post("/neworder", mwAuth, async (req, res) => {
   try {
-    debug(req.body);
     const validateData = await orderValidation.validateOrderSchema(req.body);
+    let isInStockProduct = await productsModel.findProductById(
+      validateData.productId
+    );
+    if (!isInStockProduct.stockQuant)
+      throw new ResponseError("DB", ["not in stock"]);
+    isInStockProduct.stockQuant = isInStockProduct.stockQuant - 1;
+    debug(isInStockProduct.stockQuant);
+    await productsModel.updateProduct(validateData.productId, {
+      stockQuant: isInStockProduct.stockQuant,
+    });
     const client = await clientsModel.findFilterdClientById(req.userData);
-    debug(client);
     const product = await productsModel.findFilterdProductById(
       validateData.productId
     );
-    debug(product);
 
-    // excludedKeys = [
-    //   product.stockQuant,
-    //   client.accountSecurity,
-    //   client.email,
-    //   client.password,
-    //   client.isAdmin,
-    // ];
     const order = {
       client,
       product,
     };
-    // Object.keys(order)
-    //   .filter((key) => excludedKeys.includes(key))
-    //   .forEach((key) => {
-    //     debug(`${key}: ${order[key]}`);
-    //   });
 
-    // const filteredOrder = Object.fromEntries(
-    //   Object.entries(rawOrder).map(([key, value]) => {
-    //     if (excludedKeys.includes(key)) {
-    //       return {};
-    //     }
-    //     return [key, value];
-    //   })
-    // );
     await ordersModel.addNewOrder(order);
     res.json(order);
   } catch (err) {
