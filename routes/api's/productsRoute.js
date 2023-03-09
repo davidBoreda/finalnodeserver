@@ -6,6 +6,7 @@ const mwIsAdmin = require("../../middleware/mw.IsAdmin");
 const productsModel = require("../../model/products.model");
 const debug = require("debug")("finalnodeserver:productsRouter");
 
+//Only admin can access - adding product to DB
 router.post("/addnewproduct", mwIsAdmin, async (req, res) => {
   try {
     const validateData = await productsValidation.validateAddNewProductSchema(
@@ -18,12 +19,12 @@ router.post("/addnewproduct", mwIsAdmin, async (req, res) => {
   }
 });
 
+//Only admin can access - editing product on DB
 router.put("/editproduct", mwIsAdmin, async (req, res) => {
   try {
     const validateData = await productsValidation.validateEditProductSchema(
       req.body
     );
-    debug(validateData);
     await productsModel.updateProduct(validateData._id, { ...validateData });
     res.json({ msg: "product updated" });
   } catch (err) {
@@ -31,12 +32,12 @@ router.put("/editproduct", mwIsAdmin, async (req, res) => {
   }
 });
 
+//Only admin can access - remove product from DB
 router.delete("/deleteproduct/:id", mwIsAdmin, async (req, res) => {
   try {
     const validateValues = await productsValidation.validateRemoveProductSchema(
       req.params
     );
-    console.log(validateValues.id);
     deletedProduct = await productsModel.deleteProduct(validateValues.id);
     res.json({ deleted: deletedProduct });
   } catch (err) {
@@ -44,6 +45,7 @@ router.delete("/deleteproduct/:id", mwIsAdmin, async (req, res) => {
   }
 });
 
+// API for seeing all products (productName filterd) - open to all
 router.get("/:pageNum/:itemsPerPage/findbyname", async (req, res) => {
   try {
     const validateValues =
@@ -61,6 +63,7 @@ router.get("/:pageNum/:itemsPerPage/findbyname", async (req, res) => {
   }
 });
 
+// API for seeing all products (productName filterd) - open to all
 router.get("/:pageNum/:itemsPerPage", async (req, res) => {
   try {
     const validateValues = await productsValidation.validateAllProductsSchema(

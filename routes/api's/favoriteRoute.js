@@ -6,35 +6,31 @@ const mwAuth = require("../../middleware/mw.token.auth");
 const productsModel = require("../../model/products.model");
 const favoriteValidation = require("../../validation/favoriteValidation");
 
+//API for initial creation of a list of favorites - only for registered clients after login
 router.post("/newfavorite", mwAuth, async (req, res) => {
   try {
-    console.log(req.body);
     const validateData = await favoriteValidation.validateNewFavoriteSchema(
       req.body
     );
     await favoriteModel.addNewFavorite(validateData);
     res.json({ msg: "favorite created" });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ err });
   }
 });
 
+// API that adds to list of favorites - only for registered clients after login
 router.patch("/addtofavorite", mwAuth, async (req, res) => {
   try {
-    console.log("client id from token" + req.userData);
     const exsitingFavorite = await favoriteModel.findFavoriteByClientId(
       req.userData
     );
-    console.log("exsitingFavorite" + exsitingFavorite);
-    console.log("new input" + req.body.favoritesId);
     if (exsitingFavorite) {
       const test = await favoriteModel.updateFavoriteByClientId(
         exsitingFavorite.clientId,
         exsitingFavorite.favoritesId,
         req.body.favoritesId
       );
-      console.log("after update" + test);
       res.json({ msg: "favorite added" });
     } else {
       throw new ResponseError("db", [
@@ -46,6 +42,7 @@ router.patch("/addtofavorite", mwAuth, async (req, res) => {
   }
 });
 
+// API that finds show list of favorites - only for registered clients after login
 router.get("/showfavorite", mwAuth, async (req, res) => {
   try {
     const data = await favoriteModel.findFavoriteByClientId(req.query.clientId);
@@ -67,6 +64,7 @@ router.get("/showfavorite", mwAuth, async (req, res) => {
   }
 });
 
+// API that finds show list of favorites - only for registered clients after login - more frindly use
 router.get("/showfavorite2", mwAuth, async (req, res) => {
   try {
     const data = await favoriteModel.findFavoriteByClientId(req.userData);

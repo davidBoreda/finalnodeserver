@@ -9,6 +9,7 @@ const productsModel = require("../../model/products.model");
 
 const debug = require("debug")("finalnodeserver:ordersRouter");
 
+//creates new order and save to DB - after login - koken needed
 router.post("/neworder", mwAuth, async (req, res) => {
   try {
     const validateData = await orderValidation.validateOrderSchema(req.body);
@@ -18,7 +19,6 @@ router.post("/neworder", mwAuth, async (req, res) => {
     if (!isInStockProduct.stockQuant)
       throw new ResponseError("DB", ["not in stock"]);
     isInStockProduct.stockQuant = isInStockProduct.stockQuant - 1;
-    debug(isInStockProduct.stockQuant);
     await productsModel.updateProduct(validateData.productId, {
       stockQuant: isInStockProduct.stockQuant,
     });
@@ -26,7 +26,6 @@ router.post("/neworder", mwAuth, async (req, res) => {
     const product = await productsModel.findFilterdProductById(
       validateData.productId
     );
-
     const order = {
       client,
       product,
@@ -35,17 +34,15 @@ router.post("/neworder", mwAuth, async (req, res) => {
     await ordersModel.addNewOrder(order);
     res.json(order);
   } catch (err) {
-    debug(err);
     res.status(400).json({ err });
   }
 });
 
+// API for getting list of all client orders
 router.get("/clientorder", mwAuth, async (req, res) => {
   try {
-    debug(req.userData);
     const clientEmail = await clientsModel.findClientEmailById(req.userData);
-    debug(clientEmail);
-    const clientOrders = await ordersModel.findClientOrdersByClientId(
+    const clientOrders = await ordersModel.findClientOrdersByClientEmail(
       clientEmail.email
     );
     res.json({ clientOrders });

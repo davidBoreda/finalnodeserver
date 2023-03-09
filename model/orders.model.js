@@ -7,19 +7,6 @@ const orderSchema = new Schema({
   product: { type: Object, required: true },
 });
 
-// const orderSchema = new Schema({
-//   clientID: { type: String, required: true },
-//   fName: { type: String, required: true },
-//   lName: { type: String, required: true },
-//   clientAdress: {
-//     city: { type: String, require: true },
-//     street: { type: String, require: true },
-//     houseNum: { type: String, require: true },
-//   },
-//   productId: { type: String, required: true },
-//   producName: { type: String, required: true },
-// });
-
 const Orders = mongoose.model("Orders", orderSchema);
 
 const addNewOrder = (ordertData) => {
@@ -27,11 +14,11 @@ const addNewOrder = (ordertData) => {
   return newOrder.save();
 };
 
-const findClientOrdersByClientId = (email) => {
+const findClientOrdersByClientEmail = (email) => {
   return Orders.find({ "client.email": email }).batchSize(10);
 };
 
 module.exports = {
   addNewOrder,
-  findClientOrdersByClientId,
+  findClientOrdersByClientEmail,
 };

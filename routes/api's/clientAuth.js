@@ -8,6 +8,7 @@ const jwt = require("../../config/jwt");
 const mwAuth = require("../../middleware/mw.token.auth");
 const mwIsAdmin = require("../../middleware/mw.IsAdmin");
 
+//new client registration API open to all users
 router.post("/register", async (req, res) => {
   try {
     const validateData = await clientValidation.validateRegisterSchema(
@@ -29,6 +30,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
+//login API every registered user
 router.post("/login", async (req, res) => {
   try {
     const validateData = await clientValidation.validateLoginSchema(req.body);
@@ -68,11 +70,11 @@ router.post("/login", async (req, res) => {
     const token = await jwt.initializeToken({ id: isRegister._id });
     res.json({ msg: `welcome back ${isRegister.fName}`, token });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ err });
   }
 });
 
+// updata or change own password all users with valid token
 router.post("/resetpassword", mwAuth, async (req, res) => {
   try {
     const validateData = await clientValidation.validateNewPassSchema(req.body);
@@ -88,6 +90,7 @@ router.post("/resetpassword", mwAuth, async (req, res) => {
   }
 });
 
+// open blocked account - only admin can get access
 router.patch("/unblock", mwIsAdmin, async (req, res) => {
   try {
     const validateData = await clientValidation.validateUnBlockSchema(req.body);
@@ -104,6 +107,7 @@ router.patch("/unblock", mwIsAdmin, async (req, res) => {
   }
 });
 
+// updata or change own general user information - all users with valid token
 router.put("/editclient", mwAuth, async (req, res) => {
   try {
     const validateData = await clientValidation.validateEditClient(req.body);
