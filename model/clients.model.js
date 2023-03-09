@@ -32,6 +32,7 @@ const createNewClient = (clientData) => {
   return newClient.save();
 };
 
+// finds client by mongo object _id and edit/update filds
 const editClient = (
   id,
   { fName, lName, age, clientAdress: { city, street, houseNum } }
@@ -48,14 +49,11 @@ const editClient = (
   });
 };
 
-const findByMail = (email) => {
-  return Clients.findOne({ email });
-};
-
 const isAdminById = (_id) => {
   return Clients.findById(_id);
 };
 
+//saves in data base times of faild attempts entering wrong password and time record of last one
 const setFailedAttempt = (_id, num) => {
   return Clients.findByIdAndUpdate(_id, {
     "accountSecurity.failedAttempts": num,
@@ -69,6 +67,7 @@ const setNewPass = (_id, password) => {
   });
 };
 
+//part of login API that takes action if client enterd more than 3 wrong passwords in 15 minutes
 const blockAccount = (_id) => {
   return Clients.findByIdAndUpdate(_id, {
     "accountSecurity.accountBlocked": true,
@@ -77,6 +76,7 @@ const blockAccount = (_id) => {
   });
 };
 
+//part of an API used by admin for unblocking accounts
 const unblockAccount = (_id) => {
   return Clients.findByIdAndUpdate(_id, {
     "accountSecurity.accountBlocked": false,
@@ -97,6 +97,11 @@ const findFilterdClientById = (_id) => {
 
 const findClientEmailById = (_id) => {
   return Clients.findById(_id);
+};
+
+//find client by mail - used insaid find all client orders API
+const findByMail = (email) => {
+  return Clients.findOne({ email });
 };
 
 module.exports = {
