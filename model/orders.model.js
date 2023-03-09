@@ -27,6 +27,11 @@ const addNewOrder = (ordertData) => {
   return newOrder.save();
 };
 
+const findClientOrdersByClientId = (email) => {
+  return Orders.find({ "client.email": email }).batchSize(10);
+};
+
 module.exports = {
   addNewOrder,
+  findClientOrdersByClientId,
 };

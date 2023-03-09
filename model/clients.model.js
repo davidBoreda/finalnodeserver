@@ -91,8 +91,12 @@ const findClientById = (_id) => {
 
 const findFilterdClientById = (_id) => {
   return Clients.findById(_id).select(
-    "-accountSecurity -email -password -isAdmin"
+    "-accountSecurity -password -isAdmin -_id"
   );
+};
+
+const findClientEmailById = (_id) => {
+  return Clients.findById(_id);
 };
 
 module.exports = {
@@ -106,4 +110,5 @@ module.exports = {
   editClient,
   findClientById,
   findFilterdClientById,
+  findClientEmailById,
 };

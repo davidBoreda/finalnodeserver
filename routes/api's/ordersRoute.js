@@ -40,4 +40,18 @@ router.post("/neworder", mwAuth, async (req, res) => {
   }
 });
 
+router.get("/clientorder", mwAuth, async (req, res) => {
+  try {
+    debug(req.userData);
+    const clientEmail = await clientsModel.findClientEmailById(req.userData);
+    debug(clientEmail);
+    const clientOrders = await ordersModel.findClientOrdersByClientId(
+      clientEmail.email
+    );
+    res.json({ clientOrders });
+  } catch (err) {
+    res.status(400).json({ err });
+  }
+});
+
 module.exports = router;

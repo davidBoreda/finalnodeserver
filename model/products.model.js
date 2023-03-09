@@ -49,7 +49,7 @@ const deleteProduct = (_id) => {
 };
 
 const findFilterdProductById = (_id) => {
-  return Products.findById(_id).select("-_v -stockQuant");
+  return Products.findById(_id).select(" -stockQuant");
 };
 
 module.exports = {
