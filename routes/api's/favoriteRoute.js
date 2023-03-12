@@ -22,19 +22,19 @@ router.post("/newfavorite", mwAuth, async (req, res) => {
 // API that adds to list of favorites - only for registered clients after login
 router.patch("/addtofavorite", mwAuth, async (req, res) => {
   try {
-    const exsitingFavorite = await favoriteModel.findFavoriteByClientId(
+    const existingFavorite = await favoriteModel.findFavoriteByClientId(
       req.userData
     );
-    if (exsitingFavorite) {
+    if (existingFavorite) {
       const test = await favoriteModel.updateFavoriteByClientId(
-        exsitingFavorite.clientId,
-        exsitingFavorite.favoritesId,
+        existingFavorite.clientId,
+        existingFavorite.favoritesId,
         req.body.favoritesId
       );
       res.json({ msg: "favorite added" });
     } else {
       throw new ResponseError("db", [
-        "no favorite list for this user, please ceate one first",
+        "no favorite list for this user, please cerate one first",
       ]);
     }
   } catch (err) {
@@ -50,12 +50,12 @@ router.get("/showfavorite", mwAuth, async (req, res) => {
       if (!data) {
         throw new ResponseError("db", ["no favorite list for this user"]);
       }
-      let fullProductArry = [];
+      let fullProductArray = [];
       for (id of data.favoritesId) {
         let favoriteProduct = await productsModel.findProductById(id);
-        fullProductArry.push(favoriteProduct);
+        fullProductArray.push(favoriteProduct);
       }
-      res.json(fullProductArry);
+      res.json(fullProductArray);
     } else {
       throw new ResponseError("db", ["no access"]);
     }
@@ -64,19 +64,19 @@ router.get("/showfavorite", mwAuth, async (req, res) => {
   }
 });
 
-// API that finds show list of favorites - only for registered clients after login - more frindly use
+// API that finds show list of favorites - only for registered clients after login - more friendly use
 router.get("/showfavorite2", mwAuth, async (req, res) => {
   try {
     const data = await favoriteModel.findFavoriteByClientId(req.userData);
     if (!data) {
       throw new ResponseError("db", ["no favorite list for this user"]);
     }
-    let fullFavoriteProductArry = [];
+    let fullFavoriteProductArray = [];
     for (id of data.favoritesId) {
       let favoriteProduct = await productsModel.findProductById(id);
-      fullFavoriteProductArry.push(favoriteProduct);
+      fullFavoriteProductArray.push(favoriteProduct);
     }
-    res.json(fullFavoriteProductArry);
+    res.json(fullFavoriteProductArray);
   } catch (err) {
     res.status(400).json({ err });
   }

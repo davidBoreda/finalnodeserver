@@ -1,6 +1,6 @@
 const jwt = require("../config/jwt");
 
-// client verifiation useing id encoded in token - middleware
+// client verification using id encoded in token - middleware
 module.exports = async (req, res, next) => {
   try {
     const payload = await jwt.verifyToken(req.headers["token"]);

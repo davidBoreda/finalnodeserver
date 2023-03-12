@@ -3,7 +3,7 @@ const ResponseError = require("../module/ResponseError");
 const clientsModel = require("../model/clients.model");
 const debug = require("debug")("finalnodeserver:mw.isAdmin");
 
-// admin verifiation useing id encoded in token - middleware
+// admin verification using id encoded in token - middleware
 module.exports = async (req, res, next) => {
   try {
     const payload = await jwt.verifyToken(req.headers["token"]);

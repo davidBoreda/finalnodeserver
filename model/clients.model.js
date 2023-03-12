@@ -16,14 +16,14 @@ const clientSchema = new Schema({
     accountBlocked: { type: Boolean, default: false },
     lastLoginAttempt: { type: Date, default: Date.now },
   },
-  clientAdress: {
+  clientAddress: {
     city: { type: String, require: true },
     street: { type: String, require: true },
     houseNum: { type: String, require: true },
   },
 });
 
-//createing client collection and connecting to client schema
+// creating client collection and connecting to client schema
 const Clients = mongoose.model("clients", clientSchema);
 
 //function that gets data from client(after Joi validation) and save it in DB
@@ -32,16 +32,16 @@ const createNewClient = (clientData) => {
   return newClient.save();
 };
 
-// finds client by mongo object _id and edit/update filds
+// finds client by mongo object _id and edit/update fields
 const editClient = (
   id,
-  { fName, lName, age, clientAdress: { city, street, houseNum } }
+  { fName, lName, age, clientAddress: { city, street, houseNum } }
 ) => {
   return Clients.findByIdAndUpdate(id, {
     fName,
     lName,
     age,
-    clientAdress: {
+    clientAddress: {
       city,
       street,
       houseNum,
@@ -53,7 +53,7 @@ const isAdminById = (_id) => {
   return Clients.findById(_id);
 };
 
-//saves in data base times of faild attempts entering wrong password and time record of last one
+//saves in data base times of failed attempts entering wrong password and time record of last one
 const setFailedAttempt = (_id, num) => {
   return Clients.findByIdAndUpdate(_id, {
     "accountSecurity.failedAttempts": num,
@@ -67,7 +67,7 @@ const setNewPass = (_id, password) => {
   });
 };
 
-//part of login API that takes action if client enterd more than 3 wrong passwords in 15 minutes
+//part of login API that takes action if client entered more than 3 wrong passwords in 15 minutes
 const blockAccount = (_id) => {
   return Clients.findByIdAndUpdate(_id, {
     "accountSecurity.accountBlocked": true,
@@ -89,7 +89,7 @@ const findClientById = (_id) => {
   return Clients.findById(_id);
 };
 
-const findFilterdClientById = (_id) => {
+const findFilteredClientById = (_id) => {
   return Clients.findById(_id).select(
     "-accountSecurity -password -isAdmin -_id"
   );
@@ -99,7 +99,7 @@ const findClientEmailById = (_id) => {
   return Clients.findById(_id);
 };
 
-//find client by mail - used insaid find all client orders API
+//find client by mail - used inside find all client orders API
 const findByMail = (email) => {
   return Clients.findOne({ email });
 };
@@ -114,6 +114,6 @@ module.exports = {
   unblockAccount,
   editClient,
   findClientById,
-  findFilterdClientById,
+  findFilteredClientById,
   findClientEmailById,
 };

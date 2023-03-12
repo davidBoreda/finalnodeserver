@@ -18,7 +18,7 @@ const registerSchema = Joi.object({
     }),
   age: Joi.number(),
   picture: Joi.string().trim(),
-  clientAdress: {
+  clientAddress: {
     city: Joi.string().min(3).max(255).trim().required(),
     street: Joi.string().min(3).max(255).trim().required(),
     houseNum: Joi.number().min(0).required(),
@@ -43,7 +43,7 @@ const editClientSchema = Joi.object({
   fName: Joi.string().min(3).max(255).alphanum().trim(),
   lName: Joi.string().min(3).max(255).alphanum().trim(),
   age: Joi.number(),
-  clientAdress: {
+  clientAddress: {
     city: Joi.string().min(3).max(255).trim(),
     street: Joi.string().min(3).max(255).trim(),
     houseNum: Joi.number().min(0),

@@ -13,7 +13,7 @@ router.post("/addnewproduct", mwIsAdmin, async (req, res) => {
       req.body
     );
     await productsModel.addNewProduct({ ...validateData });
-    res.json({ msg: "new product sdded succesfuly" });
+    res.json({ msg: "new product added successfully" });
   } catch (err) {
     res.status(400).json({ err });
   }
@@ -45,11 +45,11 @@ router.delete("/deleteproduct/:id", mwIsAdmin, async (req, res) => {
   }
 });
 
-// API for seeing all products (productName filterd) - open to all
+// API for seeing all products (productName filtered) - open to all
 router.get("/:pageNum/:itemsPerPage/findbyname", async (req, res) => {
   try {
     const validateValues =
-      await productsValidation.validateSerchByNameOrBrandSchema(req.query);
+      await productsValidation.validateSearchByNameOrBrandSchema(req.query);
     const countValidateValues =
       await productsValidation.validateAllProductsSchema(req.params);
     const products = await productsModel.findProductByName(
@@ -63,7 +63,7 @@ router.get("/:pageNum/:itemsPerPage/findbyname", async (req, res) => {
   }
 });
 
-// API for seeing all products (productName filterd) - open to all
+// API for seeing all products (productName filtered) - open to all
 router.get("/:pageNum/:itemsPerPage", async (req, res) => {
   try {
     const validateValues = await productsValidation.validateAllProductsSchema(

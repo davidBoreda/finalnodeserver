@@ -21,9 +21,9 @@ const findFavoriteByClientId = (clientId) => {
   return Favorite.findOne({ clientId });
 };
 
-const findByObjectIdAndUpdate = (_id, newArry) => {
+const findByObjectIdAndUpdate = (_id, newArray) => {
   return Favorite.findByIdAndUpdate(_id, {
-    favoritesId: newArry,
+    favoritesId: newArray,
   });
 };
 

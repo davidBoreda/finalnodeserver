@@ -9,8 +9,8 @@ const orderSchema = new Schema({
 
 const Orders = mongoose.model("Orders", orderSchema);
 
-const addNewOrder = (ordertData) => {
-  const newOrder = new Orders(ordertData);
+const addNewOrder = (orderData) => {
+  const newOrder = new Orders(orderData);
   return newOrder.save();
 };
 

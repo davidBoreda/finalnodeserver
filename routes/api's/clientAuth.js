@@ -81,7 +81,7 @@ router.post("/resetpassword", mwAuth, async (req, res) => {
     if (validateData.password === validateData.repeatPassword) {
       validateData.password = await bcrypt.encryptPass(validateData.password);
       await clientsModel.setNewPass(req.userData, validateData.password);
-      res.json({ msg: "password saved succesfuly" });
+      res.json({ msg: "password saved successfully" });
     } else {
       throw new ResponseError("server", ["passwords are not the same"]);
     }
@@ -107,7 +107,7 @@ router.patch("/unblock", mwIsAdmin, async (req, res) => {
   }
 });
 
-// updata or change own general user information - all users with valid token
+// update or change own general user information - all users with valid token
 router.put("/editclient", mwAuth, async (req, res) => {
   try {
     const validateData = await clientValidation.validateEditClient(req.body);

@@ -9,7 +9,7 @@ const productsModel = require("../../model/products.model");
 
 const debug = require("debug")("finalnodeserver:ordersRouter");
 
-//creates new order and save to DB - after login - koken needed
+//creates new order and save to DB - after login - token needed
 router.post("/neworder", mwAuth, async (req, res) => {
   try {
     const validateData = await orderValidation.validateOrderSchema(req.body);
@@ -22,8 +22,8 @@ router.post("/neworder", mwAuth, async (req, res) => {
     await productsModel.updateProduct(validateData.productId, {
       stockQuant: isInStockProduct.stockQuant,
     });
-    const client = await clientsModel.findFilterdClientById(req.userData);
-    const product = await productsModel.findFilterdProductById(
+    const client = await clientsModel.findFilteredClientById(req.userData);
+    const product = await productsModel.findFilteredProductById(
       validateData.productId
     );
     const order = {

@@ -48,7 +48,7 @@ const deleteProduct = (_id) => {
   return Products.findByIdAndRemove(_id);
 };
 
-const findFilterdProductById = (_id) => {
+const findFilteredProductById = (_id) => {
   return Products.findById(_id).select(" -stockQuant");
 };
 
@@ -59,5 +59,5 @@ module.exports = {
   deleteProduct,
   updateProduct,
   findProductByName,
-  findFilterdProductById,
+  findFilteredProductById,
 };
