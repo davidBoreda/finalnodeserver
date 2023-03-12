@@ -74,8 +74,8 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// updata or change own password all users with valid token
-router.post("/resetpassword", mwAuth, async (req, res) => {
+// update or change own password all users with valid token
+router.patch("/resetpassword", mwAuth, async (req, res) => {
   try {
     const validateData = await clientValidation.validateNewPassSchema(req.body);
     if (validateData.password === validateData.repeatPassword) {

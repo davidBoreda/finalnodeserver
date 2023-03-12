@@ -7,7 +7,7 @@ const ResponseError = require("../../module/ResponseError");
 const mwAuth = require("../../middleware/mw.token.auth");
 const productsModel = require("../../model/products.model");
 
-const debug = require("debug")("finalnodeserver:ordersRouter");
+const debug = require("debug")("shopeee:ordersRouter");
 
 //creates new order and save to DB - after login - token needed
 router.post("/neworder", mwAuth, async (req, res) => {
@@ -39,7 +39,7 @@ router.post("/neworder", mwAuth, async (req, res) => {
 });
 
 // API for getting list of all client orders
-router.get("/clientorder", mwAuth, async (req, res) => {
+router.get("/clientorders", mwAuth, async (req, res) => {
   try {
     const clientEmail = await clientsModel.findClientEmailById(req.userData);
     const clientOrders = await ordersModel.findClientOrdersByClientEmail(

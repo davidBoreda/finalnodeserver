@@ -1,6 +1,6 @@
 const Joi = require("joi");
 const validate = require("./validation");
-const debug = require("debug")("finalnodeserver:productsValidation");
+const debug = require("debug")("shopeee:productsValidation");
 
 const showAllSchema = Joi.object({
   pageNum: Joi.number().min(1),

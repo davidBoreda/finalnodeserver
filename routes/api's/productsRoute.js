@@ -4,7 +4,7 @@ const upload = require("../../config/multer");
 const productsValidation = require("../../validation/productsValidation");
 const mwIsAdmin = require("../../middleware/mw.IsAdmin");
 const productsModel = require("../../model/products.model");
-const debug = require("debug")("finalnodeserver:productsRouter");
+const debug = require("debug")("shopeee:productsRouter");
 
 //Only admin can access - adding product to DB
 router.post("/addnewproduct", mwIsAdmin, async (req, res) => {

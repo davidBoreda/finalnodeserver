@@ -6,7 +6,7 @@ const mwAuth = require("../../middleware/mw.token.auth");
 const productsModel = require("../../model/products.model");
 const favoriteValidation = require("../../validation/favoriteValidation");
 
-//API for initial creation of a list of favorites - only for registered clients after login
+// API for initial creation of a list of favorites - only for registered clients after login
 router.post("/newfavorite", mwAuth, async (req, res) => {
   try {
     const validateData = await favoriteValidation.validateNewFavoriteSchema(
@@ -22,19 +22,30 @@ router.post("/newfavorite", mwAuth, async (req, res) => {
 // API that adds to list of favorites - only for registered clients after login
 router.patch("/addtofavorite", mwAuth, async (req, res) => {
   try {
+    const validateData = await favoriteValidation.validateAddToFavorite(
+      req.body
+    );
     const existingFavorite = await favoriteModel.findFavoriteByClientId(
-      req.userData
+      validateData.clientId
     );
     if (existingFavorite) {
-      const test = await favoriteModel.updateFavoriteByClientId(
-        existingFavorite.clientId,
-        existingFavorite.favoritesId,
-        req.body.favoritesId
+      for (id of existingFavorite.favoritesId) {
+        if (id == validateData.favoritesId) {
+          throw new ResponseError("db", ["this product is already in list"]);
+        }
+      }
+      let newArray = [
+        ...existingFavorite.favoritesId,
+        validateData.favoritesId,
+      ];
+      await favoriteModel.findByObjectIdAndUpdate(
+        existingFavorite._id,
+        newArray
       );
       res.json({ msg: "favorite added" });
     } else {
       throw new ResponseError("db", [
-        "no favorite list for this user, please cerate one first",
+        "no favorite list for this user, please create one first",
       ]);
     }
   } catch (err) {
@@ -48,7 +59,9 @@ router.get("/showfavorite", mwAuth, async (req, res) => {
     const data = await favoriteModel.findFavoriteByClientId(req.query.clientId);
     if (req.query.clientId === req.userData) {
       if (!data) {
-        throw new ResponseError("db", ["no favorite list for this user"]);
+        throw new ResponseError("db", [
+          "no favorite list for this user, please create one first",
+        ]);
       }
       let fullProductArray = [];
       for (id of data.favoritesId) {
@@ -69,7 +82,9 @@ router.get("/showfavorite2", mwAuth, async (req, res) => {
   try {
     const data = await favoriteModel.findFavoriteByClientId(req.userData);
     if (!data) {
-      throw new ResponseError("db", ["no favorite list for this user"]);
+      throw new ResponseError("db", [
+        "no favorite list for this user, please create one first",
+      ]);
     }
     let fullFavoriteProductArray = [];
     for (id of data.favoritesId) {

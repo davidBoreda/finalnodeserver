@@ -1,5 +1,5 @@
 const ResponseError = require("../module/ResponseError");
-const debug = require("debug")("finalnodeserver:validation");
+const debug = require("debug")("shopeee:validation");
 
 const validateSchema = (userInput, schema) => {
   return new Promise((resolve, reject) => {

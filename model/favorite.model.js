@@ -27,8 +27,16 @@ const findByObjectIdAndUpdate = (_id, newArray) => {
   });
 };
 
+const updateFavoriteByClientId = (clientId, { favArray, favoritesId }) => {
+  return Favorite.findOneAndUpdate(clientId, {
+    // ["favoritesId"]: favoritesId.push(...favoritesId, favoritesId),
+    favoritesId: [...favArray, favoritesId],
+  });
+};
+
 module.exports = {
   addNewFavorite,
   findFavoriteByClientId,
   findByObjectIdAndUpdate,
+  updateFavoriteByClientId,
 };
