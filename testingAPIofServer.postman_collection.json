@@ -1,0 +1,558 @@
+{
+	"info": {
+		"_postman_id": "f9aef648-501e-4ddd-b556-5d6ae7cd04bf",
+		"name": "testingAPIofServer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25254836"
+	},
+	"item": [
+		{
+			"name": "reset password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjIxY2U4ODVlNTQ2OTRmOWU2OGNmMiIsImlhdCI6MTY3NzE2MTIxNywiZXhwIjoxNjc3NTkzMjE3fQ.Igl-WVj-nAnErPidfUvYaepgAJYifhAbIxrJAvz92HY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"password\": \"Aa111111!\",\r\n    \"repeatPassword\" : \"Aa111111!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/client/resetpassword",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"client",
+						"resetpassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unblock",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjIxY2U4ODVlNTQ2OTRmOWU2OGNmMiIsImlhdCI6MTY3NzQyMjI4MCwiZXhwIjoxNjc3ODU0MjgwfQ.Rmcy9DBt0wVUqPGdzd1_Z6Hg89dirseTQABt2wHJkdU",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"nic@gmail.com\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/client/unblock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"client",
+						"unblock"
+					]
+				},
+				"description": "add new product"
+			},
+			"response": []
+		},
+		{
+			"name": "edit product",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjIxY2U4ODVlNTQ2OTRmOWU2OGNmMiIsImlhdCI6MTY3ODAyMTI5NCwiZXhwIjoxNjc4NDUzMjk0fQ.6tiOKHOtsygjpGIM8S64AM0B0dE4rpAkpJcg6VIL7fk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"_id\": \"63ffb344f4dd0de5ac14a6ac\",\r\n  \"name\": \"HP Deskjet 3790\",\r\n  \"brand\": \"HP\",\r\n  \"description\": \"print scan copy web\",\r\n  \"stockQuant\":60,\r\n  \"price\": 1980\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/editproduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"editproduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "find by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products/1/5/findbyname?name=oven",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"1",
+						"5",
+						"findbyname"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "oven"
+						}
+					]
+				},
+				"description": "serch by name "
+			},
+			"response": []
+		},
+		{
+			"name": "add new product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjIxY2U4ODVlNTQ2OTRmOWU2OGNmMiIsImlhdCI6MTY3NzU3NzI4MCwiZXhwIjoxNjc4MDA5MjgwfQ.4KKK3F2g5IotLlPyYAd8CHQGFgF9uXNsKwFEArl_1Uc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"oven 2\",\r\n    \"brand\":\"samsung\",\r\n    \"description\":\"nice oven\",\r\n    \"price\":555\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/addnewproduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"addnewproduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fName\":\"omer\",\r\n    \"lName\":\"levi\",\r\n    \"email\":\"ome@gmail.com\",\r\n    \"password\":\"Aa123456!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/client/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"client",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"dav@gmail.com\",\r\n    \"password\":\"Aa111111!\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/client/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"client",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new favorite",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"clientId\":\"63fe10764637c5e3160012ce\" ,\r\n  \"clientName\":\"omer\" ,\r\n  \"favoritesId\": \"63fb6edcc24f5e29f221aefa\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/favorite/newfavorite",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"favorite",
+						"newfavorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add to favorite",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZmUxMDc2NDYzN2M1ZTMxNjAwMTJjZSIsImlhdCI6MTY3NzcwNjk4MCwiZXhwIjoxNjc4MTM4OTgwfQ.KaZVk03nNWlOirugEGJUUtSExeYKag0Fmi__wURhHkk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"favoritesId\": \"63ffb344f4dd0de5ac14a6ac\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/favorite/addtofavorite",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"favorite",
+						"addtofavorite"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "showfavorite?clientId=",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZmUxMDc2NDYzN2M1ZTMxNjAwMTJjZSIsImlhdCI6MTY3NzU5NDkzNCwiZXhwIjoxNjc4MDI2OTM0fQ.VMfGKsliUE2-9s2-3aISFcseAgS0cZyiQTMxYGt7Td0",
+						"type": "text"
+					},
+					{
+						"key": "token2",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjIxY2U4ODVlNTQ2OTRmOWU2OGNmMiIsImlhdCI6MTY3NzU3NzI4MCwiZXhwIjoxNjc4MDA5MjgwfQ.4KKK3F2g5IotLlPyYAd8CHQGFgF9uXNsKwFEArl_1Uc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/favorite/showfavorite?clientId=63fe10764637c5e3160012ce",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"favorite",
+						"showfavorite"
+					],
+					"query": [
+						{
+							"key": "clientId",
+							"value": "63fe10764637c5e3160012ce"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "showfavorite",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZmUxMDc2NDYzN2M1ZTMxNjAwMTJjZSIsImlhdCI6MTY3NzU5NDkzNCwiZXhwIjoxNjc4MDI2OTM0fQ.VMfGKsliUE2-9s2-3aISFcseAgS0cZyiQTMxYGt7Td0",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjIxY2U4ODVlNTQ2OTRmOWU2OGNmMiIsImlhdCI6MTY3NzU3NzI4MCwiZXhwIjoxNjc4MDA5MjgwfQ.4KKK3F2g5IotLlPyYAd8CHQGFgF9uXNsKwFEArl_1Uc",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/favorite/showfavorite2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"favorite",
+						"showfavorite2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete product",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZjIxY2U4ODVlNTQ2OTRmOWU2OGNmMiIsImlhdCI6MTY3Nzc3MTg5MSwiZXhwIjoxNjc4MjAzODkxfQ.2dB0km42mHE0h9R6S0-eMLS0_sGg4y6zXiJmbQgjrjg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/products/deleteproduct/6400c50c58f1f9dc2f00f491",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"deleteproduct",
+						"6400c50c58f1f9dc2f00f491"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit client - name/age/adress",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MGQ5NjVmMWRmNWQwZWJiODU3ZjMxZSIsImlhdCI6MTY3ODYzOTIxNCwiZXhwIjoxNjc5MDcxMjE0fQ.D9XBnc1ApAOXu_EOfvUyGruoguRexc-JnNoJRFmb2-c",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"clientAddress\": {\r\n      \"city\":\"bat-yam\",\r\n      \"street\":\"yoseftal\",\r\n      \"houseNum\":101\r\n    }\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/client/editclient",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"client",
+						"editclient"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/orders/neworder",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders",
+						"neworder"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "client order",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZmZiMWE5ZjRkZDBkZTVhYzE0YTZhNSIsImlhdCI6MTY3ODAyODUyMCwiZXhwIjoxNjc4NDYwNTIwfQ.z6V6Nch6QsBlQ5CM4jzIr2UnUGasM7cXDUJsAFyAS0M",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/api/orders/clientorders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"orders",
+						"clientorders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show all products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/products/1/10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"1",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "show all products filltered by name or brand",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/products/1/10/findbyname?brand=hp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"products",
+						"1",
+						"10",
+						"findbyname"
+					],
+					"query": [
+						{
+							"key": "brand",
+							"value": "hp"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

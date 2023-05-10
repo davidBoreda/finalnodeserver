@@ -35,7 +35,8 @@ const updateProduct = (id, { name, brand, description, price, stockQuant }) => {
 const findAllProducts = (pageNum = 1, itemsPerPage = 15) => {
   return Products.find()
     .skip((pageNum - 1) * itemsPerPage)
-    .limit(itemsPerPage);
+    .limit(itemsPerPage)
+    .select("-stockQuant");
 };
 
 const findProductByName = (productName, pageNum, itemsPerPage) => {
