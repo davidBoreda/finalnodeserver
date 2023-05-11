@@ -5,17 +5,37 @@ const ResponseError = require("../../module/ResponseError");
 const mwAuth = require("../../middleware/mw.token.auth");
 const productsModel = require("../../model/products.model");
 const favoriteValidation = require("../../validation/favoriteValidation");
-
+const clientsModel = require("../../model/clients.model");
 // API for initial creation of a list of favorites - only for registered clients after login
 router.post("/newfavorite", mwAuth, async (req, res) => {
   try {
-    const validateData = await favoriteValidation.validateNewFavoriteSchema(
+    const clientId = req.userData;
+    const { favoritesId } = await favoriteValidation.validateNewFavoriteSchema(
       req.body
     );
-    await favoriteModel.addNewFavorite(validateData);
-    res.json({ msg: "favorite created" });
+    const existingFavorite = await favoriteModel.findFavoriteByClientId(
+      clientId
+    );
+    if (existingFavorite) {
+      for (id of existingFavorite.favoritesId) {
+        if (id == favoritesId) {
+          throw new ResponseError("db", ["this product is already in list"]);
+        }
+      }
+      let newArray = [...existingFavorite.favoritesId, favoritesId];
+      await favoriteModel.findByObjectIdAndUpdate(
+        existingFavorite._id,
+        newArray
+      );
+      res.json({ msg: "favorite added" });
+    } else {
+      const clientName = await clientsModel.findClientNameById(clientId);
+      await favoriteModel.addNewFavorite({ favoritesId, clientId, clientName });
+      res.json({ msg: "favorite created" });
+    }
   } catch (err) {
     res.status(400).json({ err });
+    console.log(err);
   }
 });
 

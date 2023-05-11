@@ -110,7 +110,7 @@ API list and information;
 
     /favorite
 1.      /newfavorite - POST - must send body in request as a JSON object (only registered client including valid token in headers)
-        required fields: {clientId:" ", clientName" ":, favoritesId:" "}
+        required fields: {clientId:" ", clientName:" ", favoritesId:" "}
         You will get back - "msg": "favorite created"
 
 2.      /addtofavorite - PATCH - must send body in request as a JSON object (only registered client including valid token in headers)

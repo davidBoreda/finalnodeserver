@@ -95,6 +95,10 @@ const findFilteredClientById = (_id) => {
   );
 };
 
+const findClientNameById = (_id) => {
+  return Clients.findById(_id).select("fName");
+};
+
 const findClientEmailById = (_id) => {
   return Clients.findById(_id);
 };
@@ -116,4 +120,5 @@ module.exports = {
   findClientById,
   findFilteredClientById,
   findClientEmailById,
+  findClientNameById,
 };
