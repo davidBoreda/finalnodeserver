@@ -29,7 +29,8 @@ router.post("/newfavorite", mwAuth, async (req, res) => {
       );
       res.json({ msg: "favorite added" });
     } else {
-      const clientName = await clientsModel.findClientNameById(clientId);
+      let clientName = await clientsModel.findClientNameById(clientId);
+      clientName = clientName.fName;
       await favoriteModel.addNewFavorite({ favoritesId, clientId, clientName });
       res.json({ msg: "favorite created" });
     }
