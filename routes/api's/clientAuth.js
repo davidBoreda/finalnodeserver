@@ -120,4 +120,16 @@ router.put("/editclient", mwAuth, async (req, res) => {
   }
 });
 
+router.get("/getclientinfo", mwAuth, async (req, res) => {
+  try {
+    const clientInfoDB = await clientsModel.findClientById(req.userData);
+    if (!clientInfoDB) {
+      throw new ResponseError("DB", ["client not defined"]);
+    }
+    res.json({ name: clientInfoDB.fName });
+  } catch (err) {
+    res.status(400).json({ err });
+  }
+});
+
 module.exports = router;
