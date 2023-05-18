@@ -126,7 +126,7 @@ router.get("/getclientinfo", mwAuth, async (req, res) => {
     if (!clientInfoDB) {
       throw new ResponseError("DB", ["client not defined"]);
     }
-    res.json({ name: clientInfoDB.fName });
+    res.json({ name: clientInfoDB.fName, isAdmin: clientInfoDB.isAdmin });
   } catch (err) {
     res.status(400).json({ err });
   }
