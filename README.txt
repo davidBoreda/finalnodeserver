@@ -133,19 +133,23 @@ API list and information;
 
     /products
 1.      /addnewproduct - POST - must send body in request as a JSON object (only ADMIN)
-        required fields: {name: , brand: , description: (optional), price: ,stockQuant: ,picture: (not in use),}
+        required fields: {name: , brand: , description: (optional), price: ,stockQuant: ,picture:"(optional)" ,}
         You will get back - msg: "new product added successfully"
 
 2.      /editproduct - PUT - must send body in request as a JSON object (only ADMIN)
-        optional fields to update: {name: , brand: , description: , price: ,stockQuant: ,_id: (required),}
+        optional fields to update: {name:"" , brand:"" , description:"" , price:"" , picture:"" ,stockQuant:"" ,_id:"" (required),}
         You will get back - msg: "product updated"
 
 3.      /deleteproduct/:id - DELETE - send in params productId (only ADMIN)
         receive back deleted product conformation
 
+        /getproduct/:id" - GET send productId in params (only ADMIN) 
+        get back full product data as an object
+
+
 4.      /:pageNum/:itemsPerPage/findbyname - GET open to all
         need to pass request pageNum and itemsPerPage as params and as a query - name or brand.
-        for exp: products/1/10/findbyname?brand=HP
+        for example: products/1/10/findbyname?brand=HP
         shows all Products filtered
 
 5.      /:pageNum/:itemsPerPage - GET open to all

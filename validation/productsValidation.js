@@ -21,8 +21,14 @@ const editProductSchema = Joi.object({
   brand: Joi.string().max(50).trim(),
   description: Joi.string().max(500).trim(),
   price: Joi.number().min(0).max(10000),
-  stockQuant: Joi.number().min(0).max(100),
+  stockQuant: Joi.number().min(0),
+  picture: Joi.string().trim(),
   _id: Joi.string().min(24).max(24).required(),
+  __v: Joi.number(),
+});
+
+const getFullProductInfoSchema = Joi.object({
+  id: Joi.string().trim().hex().length(24).required(),
 });
 
 const removeProductSchema = Joi.object({
@@ -48,10 +54,14 @@ const validateEditProductSchema = (productInput) =>
 const validateSearchByNameOrBrandSchema = (productInput) =>
   validate(productInput, searchNameOrBrandSchema);
 
+const validateGetFullProductInfoSchema = (productInput) =>
+  validate(productInput, getFullProductInfoSchema);
+
 module.exports = {
   validateAllProductsSchema,
   validateAddNewProductSchema,
   validateRemoveProductSchema,
   validateEditProductSchema,
   validateSearchByNameOrBrandSchema,
+  validateGetFullProductInfoSchema,
 };

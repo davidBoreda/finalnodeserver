@@ -32,6 +32,19 @@ router.put("/editproduct", mwIsAdmin, async (req, res) => {
   }
 });
 
+//Only admin can access - get full product data
+router.get("/getproduct/:id", mwIsAdmin, async (req, res) => {
+  try {
+    validateValues = await productsValidation.validateGetFullProductInfoSchema(
+      req.params
+    );
+    productData = await productsModel.findProductById(validateValues.id);
+    res.json(productData);
+  } catch (err) {
+    res.status(400).json({ err });
+  }
+});
+
 //Only admin can access - remove product from DB
 router.delete("/deleteproduct/:id", mwIsAdmin, async (req, res) => {
   try {

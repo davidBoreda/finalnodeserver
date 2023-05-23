@@ -22,13 +22,17 @@ const findProductById = (_id) => {
   return Products.findById(_id);
 };
 
-const updateProduct = (id, { name, brand, description, price, stockQuant }) => {
+const updateProduct = (
+  id,
+  { name, brand, description, price, picture, stockQuant }
+) => {
   return Products.findByIdAndUpdate(id, {
     name,
     brand,
     description,
     price,
     stockQuant,
+    picture,
   });
 };
 
