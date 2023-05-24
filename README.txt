@@ -108,6 +108,22 @@ API list and information;
         required field: {"email":" "} (email of blocked client)
         You will get back - "msg": "Unblocked User ..."
 
+6.      /addclient - POST - must send body in request as a JSON object (only ADMIN)
+        required fields:  {
+                            "fName":"",
+                            "lName":"",
+                            "email":"",
+                            "isAdmin":boolean,
+                            "password":"",
+                            "age":(optional),
+                            "clientAddress": {
+                                                "city":"",
+                                                "street":"",
+                                                "houseNum":""
+                                                }
+                            }
+        You will get back conformation and welcome massage.
+
     /favorite
 1.      /newfavorite - POST - must send body in request as a JSON object (only registered client including valid token in headers)
         required fields: {favoritesId:" "}

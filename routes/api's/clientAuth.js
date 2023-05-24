@@ -30,6 +30,28 @@ router.post("/register", async (req, res) => {
   }
 });
 
+//Add new client API only Admin
+router.post("/addclient", mwIsAdmin, async (req, res) => {
+  try {
+    const validateData = await clientValidation.validateRegisterByAdminSchema(
+      req.body
+    );
+    const isRegister = await clientsModel.findByMail(validateData.email);
+    if (isRegister) {
+      throw new ResponseError("DB", ["This mail is in use, try login."]);
+    }
+    validateData.password = await bcrypt.encryptPass(validateData.password);
+    await clientsModel.createNewClient(validateData);
+    res.json({
+      msg: `new user ${
+        validateData.fName + " " + validateData.lName
+      } was created, welcome ${validateData.fName}.`,
+    });
+  } catch (err) {
+    res.status(400).json({ err });
+  }
+});
+
 //login API every registered user
 router.post("/login", async (req, res) => {
   try {
