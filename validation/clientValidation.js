@@ -30,6 +30,7 @@ const registerByAdminSchema = Joi.object({
   lName: Joi.string().min(3).max(255).alphanum().required().trim(),
   email: Joi.string().min(3).max(255).email().required().trim(),
   isAdmin: Joi.boolean(),
+  vipClient: Joi.boolean(),
   password: Joi.string()
     .regex(
       new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+]).{0,}$")
@@ -67,6 +68,7 @@ const editClientSchema = Joi.object({
   fName: Joi.string().min(3).max(255).alphanum().trim(),
   lName: Joi.string().min(3).max(255).alphanum().trim(),
   age: Joi.number(),
+  picture: Joi.string().trim(),
   clientAddress: {
     city: Joi.string().min(3).max(255).trim(),
     street: Joi.string().min(3).max(255).trim(),

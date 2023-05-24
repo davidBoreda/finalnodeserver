@@ -10,6 +10,7 @@ const clientSchema = new Schema({
   password: { type: String, required: true },
   age: { type: Number },
   picture: { type: String },
+  vipClient: { type: Boolean, default: false },
   isAdmin: { type: Boolean, default: false },
   accountSecurity: {
     failedAttempts: { type: Number, default: 0 },
@@ -35,12 +36,13 @@ const createNewClient = (clientData) => {
 // finds client by mongo object _id and edit/update fields
 const editClient = (
   id,
-  { fName, lName, age, clientAddress: { city, street, houseNum } }
+  { fName, lName, age, picture, clientAddress: { city, street, houseNum } }
 ) => {
   return Clients.findByIdAndUpdate(id, {
     fName,
     lName,
     age,
+    picture,
     clientAddress: {
       city,
       street,

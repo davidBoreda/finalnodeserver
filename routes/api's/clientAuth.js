@@ -154,8 +154,11 @@ router.get("/getclientinfo", mwAuth, async (req, res) => {
       email: clientInfoDB.email,
       age: clientInfoDB.age,
       isAdmin: clientInfoDB.isAdmin,
+      vipClient: clientInfoDB.vipClient,
       clientAddress: clientInfoDB.clientAddress,
+      picture: clientInfoDB.picture,
     });
+    console.log(clientInfoDB);
   } catch (err) {
     res.status(400).json({ err });
   }
